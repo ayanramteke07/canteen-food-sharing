@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, request, redirect, jsonify
+
 import psycopg
-from psycopg.rows import dict_row
 from dotenv import load_dotenv
+from flask import Flask, jsonify, redirect, render_template, request
+from psycopg.rows import dict_row
 
 load_dotenv()
 
@@ -53,7 +54,8 @@ def add_food():
         try:
             cursor.execute(
                 """
-                INSERT INTO food_items (name, description, total_quantity, remaining_quantity, pickup_deadline)
+                INSERT INTO food_items
+                (name, description, total_quantity, remaining_quantity, pickup_deadline)
                 VALUES (%s, %s, %s, %s, %s);
                 """,
                 (name, description, quantity, quantity, pickup_deadline),

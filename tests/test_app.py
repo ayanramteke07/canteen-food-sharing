@@ -1,11 +1,12 @@
-import pytest
-import psycopg
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
+import psycopg
+import pytest
+from dotenv import load_dotenv
 
 from app import app
+
+load_dotenv()
 
 
 @pytest.fixture

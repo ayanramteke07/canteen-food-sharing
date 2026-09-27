@@ -1,4 +1,5 @@
 import os
+
 import psycopg
 from dotenv import load_dotenv
 
@@ -12,8 +13,20 @@ VALUES (%s, %s, %s, %s, %s);
 """
 
 starter_items = [
-    ("Vegetable Samosas", "Freshly made samosas from lunch service, mildly spiced.", 20, 20, "2026-09-27 18:00:00"),
-    ("Paneer Sandwiches", "Grilled sandwiches, extra from the counter.", 10, 10, "2026-09-27 18:30:00"),
+    (
+        "Vegetable Samosas",
+        "Freshly made samosas from lunch service, mildly spiced.",
+        20,
+        20,
+        "2026-09-27 18:00:00",
+    ),
+    (
+        "Paneer Sandwiches",
+        "Grilled sandwiches, extra from the counter.",
+        10,
+        10,
+        "2026-09-27 18:30:00",
+    ),
 ]
 
 connection = psycopg.connect(database_url)
