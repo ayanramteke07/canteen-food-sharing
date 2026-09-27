@@ -58,7 +58,8 @@ jobs:
 
       - name: Run pytest
         run: pytest -v
-          docker-build-and-smoke-test:
+
+  docker-build-and-smoke-test:
     name: Docker Build and Smoke Test
     runs-on: ubuntu-latest
     needs: lint-and-test
