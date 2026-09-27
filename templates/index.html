@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Food Sharing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Canteen Surplus Food</h1>
+        <p>Available surplus food from the canteen. Claim a portion before the pickup deadline.</p>
+        <a href="/add" style="color: white; font-weight: bold;">+ Add Surplus Food</a>
+    </header>
+
+    <main>
+        <div class="food-grid">
+            {% for item in food_items %}
+                <div class="food-card">
+                    <h2>{{ item.name }}</h2>
+                    <p>{{ item.description }}</p>
+                    <p>Remaining: {{ item.remaining_quantity }} / {{ item.total_quantity }}</p>
+                    <p>Pickup deadline: {{ item.pickup_deadline }}</p>
+                    {% if item.claimed %}
+                        <span class="status unavailable">Unavailable</span>
+                    {% else %}
+                        <span class="status available">Available</span>
+                        <form method="POST" action="{{ url_for('claim_food', item_id=item.id) }}">
+                            <button type="submit" class="claim-button">Claim a portion</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 16px; color: #999; font-size: 0.8rem;">
+        Running commit: {{ commit }}
+    </footer>
+</body>
+</html>

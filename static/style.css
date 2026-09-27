@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #fdf6ec;
+    color: #2f2f2f;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #d95d39;
+    color: white;
+    padding: 24px 16px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+header p {
+    margin: 8px 0 0;
+    font-size: 0.95rem;
+}
+
+main {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.food-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+}
+
+.food-card h2 {
+    margin-top: 0;
+    color: #d95d39;
+    font-size: 1.2rem;
+}
+
+.food-card p {
+    margin: 6px 0;
+    font-size: 0.92rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status.available {
+    background-color: #dff2e1;
+    color: #2e7d32;
+}
+
+.status.unavailable {
+    background-color: #fde2e2;
+    color: #c62828;
+}
+
+.food-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    gap: 4px;
+}
+
+.food-form label {
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.food-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.food-form button {
+    margin-top: 16px;
+    background-color: #d95d39;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.food-form button:hover {
+    background-color: #b84a2c;
+}
+
+.claim-button {
+    margin-top: 10px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.claim-button:hover {
+    background-color: #1b5e20;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Surplus Food - Canteen Food Sharing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Add Surplus Food</h1>
+        <p>Fill in the details of the leftover food to list it for students.</p>
+    </header>
+
+    <main>
+        {% if error %}
+            <p class="status unavailable">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="/add" class="food-form">
+            <label for="name">Food name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" required>
+
+            <label for="quantity">Quantity available</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+
+            <label for="pickup_deadline">Pickup deadline</label>
+            <input type="text" id="pickup_deadline" name="pickup_deadline" placeholder="e.g. 6:00 PM today" required>
+
+            <button type="submit">Add Food</button>
+        </form>
+
+        <p><a href="/">Back to home page</a></p>
+    </main>
+</body>
+</html>
