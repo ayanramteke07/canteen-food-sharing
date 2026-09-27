@@ -58,3 +58,64 @@ jobs:
 
       - name: Run pytest
         run: pytest -v
+          docker-build-and-smoke-test:
+    name: Docker Build and Smoke Test
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: canteen_user
+          POSTGRES_PASSWORD: canteen_pass
+          POSTGRES_DB: canteen_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t canteen-app:ci .
+
+      - name: Run container
+        run: |
+          docker run -d --name canteen-app-ci \
+            --network host \
+            -e DATABASE_URL="postgresql://canteen_user:canteen_pass@localhost:5432/canteen_db" \
+            canteen-app:ci
+
+      - name: Wait for app to start
+        run: |
+          for i in $(seq 1 15); do
+            if curl -sf http://localhost:5000/health; then
+              echo "App is up!"
+              exit 0
+            fi
+            echo "Waiting for app to respond..."
+            sleep 2
+          done
+          echo "App did not respond in time"
+          docker logs canteen-app-ci
+          exit 1
+
+      - name: Smoke test the /health endpoint
+        run: |
+          response=$(curl -s http://localhost:5000/health)
+          echo "Response: $response"
+          echo "$response" | grep -q '"status":"ok"' || (echo "Health check failed" && exit 1)
+
+      - name: Show container logs (always, for debugging)
+        if: always()
+        run: docker logs canteen-app-ci
+
+      - name: Stop and remove container
+        if: always()
+        run: docker rm -f canteen-app-ci
