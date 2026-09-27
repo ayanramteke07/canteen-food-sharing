@@ -2,6 +2,8 @@
 
 A Flask web application that lets college canteen staff list surplus food after service hours, so students and authorized users can view and claim available portions before a pickup deadline — reducing food wastage.
 
+**Live application:** https://canteen-food-sharing.onrender.com
+
 ## Features
 
 - Home page displaying available surplus food, with quantity, description, and pickup deadline
@@ -19,13 +21,15 @@ A Flask web application that lets college canteen staff list surplus food after 
 - **Testing:** pytest, using an isolated test database
 - **Containerization:** Docker
 - **CI/CD:** GitHub Actions
-- **Deployment:** Render
+- **Deployment:** Render (Docker-based Web Service + managed PostgreSQL)
 
 ## Architecture
 
-Browser sends a request to the Flask app (app.py), which reads from and writes to a PostgreSQL database, then renders the response back to the browser.
+Browser sends a request to the Flask app (`app.py`), which reads from and writes to a PostgreSQL database, then renders the response back to the browser.
 
 Food listings and claims are stored persistently in a PostgreSQL `food_items` table. Environment-specific configuration (database credentials, secrets) is provided via environment variables, never hardcoded in source code.
+
+In production, the app runs inside a Docker container on Render, using Gunicorn as the WSGI server, and connects to a separate managed PostgreSQL instance also hosted on Render.
 
 ## Local Setup
 
