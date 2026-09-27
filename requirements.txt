@@ -2,3 +2,4 @@ Flask==3.1.*
 python-dotenv==1.*
 psycopg[binary]==3.*
 pytest==8.*
+gunicorn==23.*
